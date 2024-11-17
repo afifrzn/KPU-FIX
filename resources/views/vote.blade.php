@@ -74,16 +74,20 @@
                             @if ($candidate->name == 'Empty Box')
                                 @continue
                             @endif
-
-                            <label class="block bg-gray-50 border border-gray-300 rounded-lg p-3 cursor-pointer">
-                                <input type="radio" name="candidate" value="{{ $candidate->id }}"
-                                    class="mr-2">
-                                <span class="text-gray-800 font-semibold">{{ $candidate->name }}</span>
-                                <p class="text-gray-500 text-sm mt-1">[Brief bio, policies, and achievements]</p>
-                                <button type="button" class="text-primary hover:underline text-sm"
-                                    onclick="openModal('Candidate 1', 'Candidate 1 Vision...', 'Candidate 1 Mission...', 'https://via.placeholder.com/150')">View
+                            <div class="flex items-center bg-gray-50 border border-gray-300 rounded-lg p-4 space-x-4">
+                                <img src="{{$candidate->photo != null ? Storage::url($candidate->photo) : Storage::url('photos/default.png')  }}" alt="https://via.placeholder.com/100" class="w-24 h-24 rounded-full object-cover">
+                                <div class="flex-1">
+                                    <label>
+                                        <input type="radio" name="candidate" value="{{ $candidate->id }}" class="mr-2">
+                                        <span class="text-gray-800 font-semibold">{{ $candidate->name }}</span>
+                                    </label>
+                                    <p class="text-gray-500 text-sm mt-1">{{ $candidate->bio }}</p>
+    
+                                    <button type="button" class="text-primary hover:underline text-sm"
+                                    onclick="openModal('{{ $candidate->name }}', '{{ $candidate->vision }}', '{{ $candidate->mission }}', '{{ $candidate->photo != null ? Storage::url($candidate->photo) : Storage::url('photos/default.png') }}')">View
                                     Full Profile</button>
-                            </label>
+                                </div>
+                            </div>
                         @else
                         <div class="flex items-center bg-gray-50 border border-gray-300 rounded-lg p-4 space-x-4">
                             <img src="{{$candidate->photo != null ? Storage::url($candidate->photo) : Storage::url('photos/default.png')  }}" alt="https://via.placeholder.com/100" class="w-24 h-24 rounded-full object-cover">
